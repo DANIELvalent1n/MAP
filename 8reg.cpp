@@ -14,7 +14,31 @@ void printChessboard(const std::vector<std::vector<int>>& chessboard) {
     std::cout << "\n";
 }
 
+// Funcție pentru a verifica dacă o regină poate fi plasată pe poziția (row, col)
+bool isSafe(const std::vector<std::vector<int>>& chessboard, int row, int col) {
+    // Verificăm rândul
+    for (int i = 0; i < col; ++i) {
+        if (chessboard[row][i]) {
+            return false;
+        }
+    }
 
+    // Verificăm diagonala superioară
+    for (int i = row, j = col; i >= 0 && j >= 0; --i, --j) {
+        if (chessboard[i][j]) {
+            return false;
+        }
+    }
+
+    // Verificăm diagonala inferioară
+    for (int i = row, j = col; i < N && j >= 0; ++i, --j) {
+        if (chessboard[i][j]) {
+            return false;
+        }
+    }
+
+    return true;
+}
 
 // Funcție pentru a rezolva Problema Reginei utilizând backtracking
 bool solveNQueens(std::vector<std::vector<int>>& chessboard, int col) {
